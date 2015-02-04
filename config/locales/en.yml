@@ -3,7 +3,7 @@ en:
     show:
       connect: "Connect"
       disconnect: "Disconnect"
-      import_now: "Import now"
+      import_now: "Import Profiles"
       sign_out: "Sign Out"
       missing_namely_field: "You need to add a '%{name}' field to your Namely account to avoid importing the same person multiple times"
 
