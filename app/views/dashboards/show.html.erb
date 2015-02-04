@@ -5,7 +5,9 @@
       <tr>
         <% if @jobvite_connection.connected? %>
           <td>
-            <%= fa_icon "check-circle", class: "connected", text: "Jobvite" %>
+            <h3>
+              <%= fa_icon "check-circle", class: "connected", text: "Jobvite" %>
+            </h3>
             <p><%= @jobvite_connection.api_key %></p>
           </td>
           <% if @jobvite_connection.missing_namely_field? %>
@@ -26,7 +28,9 @@
           </td>
         <% else %>
           <td>
-            <%= fa_icon "minus-circle", class: "disconnected", text: "Jobvite" %>
+            <h3>
+              <%= fa_icon "minus-circle", class: "disconnected", text: "Jobvite" %>
+            </h3>
           </td>
           <td></td>
           <td></td>

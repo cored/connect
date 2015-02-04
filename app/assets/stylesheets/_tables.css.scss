@@ -26,6 +26,11 @@ table {
           padding-right: 10px;
           text-align: left;
         }
+
+        h3 {
+          text-decoration: bold;
+          color: $grey-75;
+        }
       }
 
       &:first-child {
