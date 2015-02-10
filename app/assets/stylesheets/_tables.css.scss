@@ -6,7 +6,7 @@ table {
     tr {
       border-bottom: 1px solid $grey-15;
 
-      th { 
+      th {
         padding: 20px 0;
         border: 0;
         margin: 0;
@@ -31,6 +31,18 @@ table {
           text-decoration: bold;
           font-size: 18px;
           color: $grey-75;
+        }
+      }
+
+      &.top-align {
+        vertical-align: top;
+
+        td {
+          vertical-align: top;
+
+          form {
+            padding-top: 0 !important;
+          }
         }
       }
 
