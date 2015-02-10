@@ -4,7 +4,7 @@
     <tbody>
       <tr class='top-align'>
         <% if @jobvite_connection.connected? %>
-          <td>
+          <td class='half'>
             <h3>
               <%= fa_icon "check-circle", class: "connected", text: "Jobvite" %>
             </h3>
@@ -14,13 +14,9 @@
             <td>
               <%= t(".missing_namely_field", name: @jobvite_connection.required_namely_field) %>
             </td>
-          <% else %>
-            <td></td>
           <% end %>
-          <td>
-            <%= button_to t("dashboards.show.import_now"), jobvite_imports_path, class: '-n-btn' %>
-          </td>
-          <td>
+          <td class='right-align'>
+            <%= button_to t("dashboards.show.import_now"), jobvite_imports_path, class: '-n-btn -n-btn-sm' %>
             <a href="<%= url_for(jobvite_connection_path) %>" class="-n-btn -n-btn-sm -n-btn-danger -n-btn-link" data-method="delete" rel="nofollow">
               <%= fa_icon "times" %>
               <%= t("dashboards.show.disconnect") %>
@@ -32,8 +28,6 @@
               <%= fa_icon "minus-circle", class: "disconnected", text: "Jobvite" %>
             </h3>
           </td>
-          <td></td>
-          <td></td>
           <td>
             <a href="<%= url_for(edit_jobvite_connection_path) %>" class="-n-btn -n-btn-sm">
               <%= fa_icon "plug", text: t("dashboards.show.connect") %>
