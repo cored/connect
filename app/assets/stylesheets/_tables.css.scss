@@ -27,10 +27,26 @@ table {
           text-align: left;
         }
 
+        &.half {
+          width: 50%;
+        }
+
         h3 {
           font-weight: bold;
           font-size: 18px;
           color: $grey-75;
+        }
+
+        .-n-btn {
+          margin-left: 20px;
+
+          &:first-child {
+            margin-left: 0;
+          }
+        }
+
+        &.right-align {
+          text-align: right;
         }
       }
 
