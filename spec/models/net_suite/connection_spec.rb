@@ -163,6 +163,7 @@ describe NetSuite::Connection do
         %w(releaseDate departure_date),
         %w(title job_title),
         %w(address home),
+        %w(supervisor netsuite_supervisor_id),
         ["initials", nil],
       ])
     end

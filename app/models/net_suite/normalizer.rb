@@ -41,6 +41,7 @@ class NetSuite::Normalizer
         "subsidiary" => subsidiary,
         "releaseDate" => release_date,
         "hireDate" => hire_date,
+        "supervisor" => supervisor,
       }
     end
 
@@ -87,6 +88,12 @@ class NetSuite::Normalizer
 
     def subsidiary
       { "internalId" => @subsidiary_id }
+    end
+
+    def supervisor
+      {
+        "internalId" => @attributes.fetch("supervisor", Fields::NullValue.new).to_s
+      }
     end
 
     def custom_keys(attributes)

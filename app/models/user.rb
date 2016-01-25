@@ -16,11 +16,13 @@ class User < ActiveRecord::Base
   end
 
   def namely_fields_by_label
-    namely_fields.
+    NamelyFieldsByLabel.new(
+      namely_fields: namely_fields.
       all.
       select { |field| AttributeMapper::SUPPORTED_TYPES.include?(field.type) }.
       sort_by { |field| field.label.downcase }.
       map { |field| [field.label, field.name] }
+    )
   end
 
   def namely_fields
@@ -43,4 +45,5 @@ class User < ActiveRecord::Base
     self.access_token_expiry = Users::TokenExpiry.for(access_token_expires_in)
     save
   end
+
 end
