@@ -1,7 +1,11 @@
 module NetSuite
   class Client
     class Request
-      BASE_URL = "https://api.cloud-elements.com/elements/api-v2"
+      if ENV['CLOUD_ELEMENTS_STAGING'].present?
+        BASE_URL = "https://staging.cloud-elements.com/elements/api-v2"
+      else
+        BASE_URL = "https://api.cloud-elements.com/elements/api-v2"
+      end
 
       def initialize(element_secret:, organization_secret:, user_secret:)
         @element_secret = element_secret
