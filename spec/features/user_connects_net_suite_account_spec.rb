@@ -27,14 +27,14 @@ feature "user connects NetSuite account" do
   end
 
   scenario "with bad authentication" do
-    stub_create_instance(status: 400, body: { message: "Not good" })
+    stub_create_instance(status: 400, body: { message: "The registering of the partner failed. Please contact support@cloud-elements.com to get setup as a partner." })
 
     visit_dashboard
 
     net_suite.click_link t("dashboards.show.connect")
 
     submit_net_suite_account_form
-    expect(page).to have_content("Not good")
+    expect(page).to have_content("api@namely.com")
   end
 
   scenario "with updated credentials" do
