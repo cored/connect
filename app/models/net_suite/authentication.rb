@@ -50,8 +50,12 @@ module NetSuite
       )
       true
     rescue NetSuite::ApiError => exception
-      errors.add(:base, exception.message)
+      errors.add(:base, add_proper_support_email(exception.message))
       false
+    end
+
+    def add_proper_support_email(message)
+      message.gsub(/.+@.+\.\w{3}/, ENV.fetch("SUPPORT_EMAIL", "api@namely.com"))
     end
 
     def attributes
