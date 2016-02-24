@@ -34,7 +34,7 @@ feature "user connects NetSuite account" do
     net_suite.click_link t("dashboards.show.connect")
 
     submit_net_suite_account_form
-    expect(page).to have_content("api@namely.com")
+    expect(page).to have_content("The registering of the partner failed. Please contact api@namely.com to get setup as a partner.")
   end
 
   scenario "with updated credentials" do
