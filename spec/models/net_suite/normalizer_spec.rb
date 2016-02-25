@@ -1,7 +1,9 @@
 require "rails_helper"
 
 describe NetSuite::Normalizer do
-  let(:configuration) { double("configuration", subsidiary_id: "123") }
+  let(:configuration) do
+    double( "configuration", subsidiary_id: "123")
+  end
 
   describe "delegation" do
     subject { build_normalizer }
@@ -13,7 +15,8 @@ describe NetSuite::Normalizer do
     it "returns a converted data structure based on field mappings" do
       export_attributes = export
 
-      expect(export_attributes.keys).to match_array(%w(
+      expect(export_attributes.keys).to match_array(
+        %w(
         customFieldList
         email
         firstName
@@ -24,7 +27,9 @@ describe NetSuite::Normalizer do
         subsidiary
         releaseDate
         nullFieldList
-      ))
+        supervisor
+        )
+      )
     end
 
     it "does not include custom fields in field mappings if opted out" do
@@ -175,6 +180,25 @@ describe NetSuite::Normalizer do
         expect(
           export_attributes["subsidiary"]
         ).to eq("internalId" => configuration.subsidiary_id)
+      end
+    end
+
+    context "supervisor" do
+      it "provides a supervisor from attributes on the profile" do
+        profile_data = stubbed_profile_data({"netsuite_supervisor_id" => "456"})
+        export_attributes = export(profile_data)
+
+        expect(
+          export_attributes["supervisor"]
+        ).to eq("internalId" => "456")
+      end
+
+      it "returns a blank without a netsuite_id" do
+        export_attributes = export
+
+        expect(
+          export_attributes["supervisor"]
+        ).to eq("internalId" => nil)
       end
     end
 

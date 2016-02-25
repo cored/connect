@@ -54,45 +54,6 @@ describe User do
     end
   end
 
-  describe "#namely_fields_by_label" do
-    it "returns mappable fields from a Namely connection alphabetically" do
-      models = [
-        double(name: "first_name", label: "First name", type: "text"),
-        double(name: "last_name", label: "Last name", type: "longtext"),
-        double(name: "gender", label: "Gender", type: "select"),
-        double(name: "email", label: "Email", type: "email"),
-        double(name: "job_title", label: "Job title", type: "referencehistory"),
-        double(name: "user_status", label: "Status", type: "referenceselect"),
-        double(name: "start_date", label: "started", type: "date"),
-        double(name: "home", label: "Home address", type: "address"),
-        stub_profile_field(type: "checkboxes"),
-        stub_profile_field(type: "file"),
-        stub_profile_field(type: "image"),
-        stub_profile_field(type: "salary"),
-      ]
-      fields = double("fields", all: models)
-      stub_namely_connection fields: fields
-      user = User.new
-
-      result = user.namely_fields_by_label
-
-      expect(result).to eq([
-        ["Email", "email"],
-        ["First name", "first_name"],
-        ["Gender", "gender"],
-        ["Home address", "home"],
-        ["Job title", "job_title"],
-        ["Last name", "last_name"],
-        ["started", "start_date"],
-        ["Status", "user_status"],
-      ])
-    end
-
-    def stub_profile_field(type:)
-      double(name: type, label: "#{type} field", type: type)
-    end
-  end
-
   describe "#namely_fields" do
     it "returns fields from its Namely connection" do
       fields = double(:namely_fields)

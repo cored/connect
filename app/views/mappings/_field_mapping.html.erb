@@ -9,10 +9,19 @@
     ) %>
   </td>
   <td>
-    <%= fields.input(
-      :namely_field_name,
-      collection: namely_fields,
-      label: false
-    ) %>
+    <% if namely_fields.is_disable_field?(field_mapping.namely_field_name) %>
+      <%= fields.input(
+        :namely_field_name,
+        collection: namely_fields,
+        disabled: namely_fields.disable_namely_fields,
+        label: false
+      ) %>
+  <% else %>
+      <%= fields.input(
+        :namely_field_name,
+        collection: namely_fields,
+        label: false
+      ) %>
+  <% end %>
   </td>
 </tr>

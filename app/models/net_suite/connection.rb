@@ -139,6 +139,7 @@ class NetSuite::Connection < ActiveRecord::Base
     mappings.map! "phone", to: "home_phone", name: "Phone"
     mappings.map! "title", to: "job_title", name: "Title"
     mappings.map! "hireDate", to: "start_date", name: "Hire Date"
+    mappings.map! "supervisor", to: "netsuite_supervisor_id", name: "Supervisor"
 
     mappings.map!(
       "releaseDate",
