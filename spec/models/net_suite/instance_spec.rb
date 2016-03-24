@@ -27,8 +27,8 @@ describe NetSuite::Instance do
         expect(config["netsuite.sandbox"]).to eq false
         expect(config["netsuite.appId"]).to eq "appid"
         expect(config["netsuite.sso.roleId"]).to eq "3"
-        expect(config["netsuite.sso.companyId"]).to eq "#{authentication.account_id}_coid"
-        expect(config["netsuite.sso.userId"]).to eq "#{authentication.account_id}_userid"
+        expect(config["netsuite.sso.companyId"]).to eq "#{authentication.partner_id}_#{authentication.account_id}"
+        expect(config["netsuite.sso.userId"]).to eq "#{authentication.partner_id}_#{authentication.email}"
         expect(config["netsuite.sso.partnerId"]).to eq "partnerid"
         expect(element["key"]).to eq "netsuiteerp"
         expect(instance_hash["tags"]).to eq []
