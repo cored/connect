@@ -73,7 +73,7 @@ module NetSuite
       rescue RestClient::Unauthorized => exception
         raise Unauthorized, exception.message
       rescue RestClient::Exception => exception
-        track_and_log_exception(exception)
+        validate_exception(exception)
       end
 
       def url(path)
