@@ -99,6 +99,7 @@ module NetSuite
         case exception.response.body
         when /already an employee with external access/
           Rails.logger.info("netsuite error: external employee error")
+          raise NetSuite::ApiError, exception, exception.backtrace
         else
           track_and_log_exception(exception)
         end
