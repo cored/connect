@@ -184,6 +184,29 @@ describe NetSuite::Client do
         expect(result["internalId"]).to eq("1949")
       end
     end
+
+    context "on HTTP failure for a duplicate profile" do
+      it "does not raise an error" do
+        response = {
+          "providerMessage" => "There is already an employee with external access to this account using that entity name"
+        }.to_json
+
+        stub_request(
+          :post,
+          "https://api.cloud-elements.com/elements/api-v2/hubs/erp/employees"
+        ).to_return(status: 400, body: response)
+
+        client = NetSuite::Client.new(
+          user_secret: "user-secret",
+          organization_secret: "org-secret",
+          partner_id: "partnerid",
+          app_id: "appid",
+          element_secret: "element-secret"
+        )
+
+        expect { client.create_employee({}) }.to_not raise_error
+      end
+    end
   end
 
   describe "#update_employee" do
