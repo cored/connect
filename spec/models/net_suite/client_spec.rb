@@ -204,7 +204,7 @@ describe NetSuite::Client do
           element_secret: "element-secret"
         )
 
-        expect { client.create_employee({}) }.to_not raise_error
+        expect { client.create_employee({}) }.to raise_error(NetSuite::ApiError)
       end
     end
   end
