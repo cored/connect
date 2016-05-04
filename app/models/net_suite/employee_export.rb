@@ -41,12 +41,18 @@ module NetSuite
         profile: profile
       )
     rescue NetSuite::ApiError => exception
+      track_and_log_exception(exception) if exception.track?
       Result.new(
         success: false,
         error: exception.to_s,
         updated: updated,
         profile: profile
       )
+    end
+
+    def track_and_log_exception(exception)
+      Raygun.track_exception(exception)
+      Rails.logger.error("netsuite error: #{exception.message}")
     end
   end
 

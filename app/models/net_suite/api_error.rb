@@ -20,7 +20,7 @@ module NetSuite
     end
 
     def track?
-      !message.includes?("Bad request")
+      !message.include?("Bad request")
     end
 
     private

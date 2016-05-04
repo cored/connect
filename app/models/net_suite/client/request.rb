@@ -73,7 +73,7 @@ module NetSuite
       rescue RestClient::Unauthorized => exception
         raise Unauthorized, exception.message
       rescue RestClient::Exception => exception
-        validate_exception(exception)
+        raise NetSuite::ApiError, exception, exception.backtrace
       end
 
       def url(path)
@@ -93,24 +93,6 @@ module NetSuite
           "Organization" => organization_secret,
           "Element" => element_secret
         }
-      end
-
-      def validate_exception(exception)
-        case exception.response.body
-        when /already an employee with external access/
-          Rails.logger.info("netsuite error: external employee error")
-          raise NetSuite::ApiError, exception, exception.backtrace
-        else
-          track_and_log_exception(exception)
-        end
-      end
-
-      def track_and_log_exception(exception)
-        Raygun.track_exception(exception)
-        Rails.logger.error("netsuite error: #{exception}")
-        Rails.logger.error("netsuite error: #{exception.response.body}")
-        Rails.logger.error("netsuite error: #{exception.response.headers}")
-        raise NetSuite::ApiError, exception, exception.backtrace
       end
 
       attr_reader :element_secret, :organization_secret, :user_secret
