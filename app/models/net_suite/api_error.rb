@@ -19,6 +19,10 @@ module NetSuite
       "NetSuite API Error: #{http_code} - #{message}"
     end
 
+    def track?
+      !message.includes?("Bad request")
+    end
+
     private
 
     def response_data

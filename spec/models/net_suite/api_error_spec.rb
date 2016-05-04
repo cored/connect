@@ -1,6 +1,10 @@
 require "rails_helper"
 
 describe NetSuite::ApiError do
+  describe "#track?" do
+
+  end
+
   describe "#message" do
     context "with a JSON message" do
       it "returns the encoded message" do
